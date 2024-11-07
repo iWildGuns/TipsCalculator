@@ -25,7 +25,7 @@ export default function OrderContents({
               </p>
 
               <p className="font-black">
-                Unid. {item.quantity} -{" "}
+                Unit. {item.quantity} -{" "}
                 {formatCurrency(item.price * item.quantity)}{" "}
               </p>
             </div>
