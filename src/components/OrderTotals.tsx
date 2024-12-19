@@ -1,17 +1,18 @@
 import { useCallback } from "react";
 import { OrderItem } from "../types";
 import { formatCurrency } from "../helpers";
+import { OrderActions } from "../ordeReducer.ts/orderReducer";
 
 type OrderTotalsProps = {
   order: OrderItem[];
   tip: number;
-  placeOrder: () => void;
+  dispatch: React.Dispatch<OrderActions>;
 };
 
 export default function OrderTotals({
   order,
   tip,
-  placeOrder,
+  dispatch,
 }: OrderTotalsProps) {
   const subTotalAmount = useCallback(
     () => order.reduce((total, item) => total + item.quantity * item.price, 0),
@@ -46,7 +47,7 @@ export default function OrderTotals({
       <button
         className=" w-full bg-black p-3 text-white font-bold mt-10 disabled:opacity-10"
         disabled={totalAmount() === 0}
-        onClick={placeOrder}
+        onClick={() => dispatch({ type: "placeOrder" })}
       >
         Save Order
       </button>
